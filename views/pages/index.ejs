@@ -5,7 +5,7 @@
             <main>
                 <div class="messages-container">
                     Messages:
-                    <% messages.forEach((message)=> { %>
+                    <% messages.forEach((message, index)=> { %>
                         <div class="message">
                             <div class="user">
                                 User: <%= message.user %>
@@ -15,6 +15,9 @@
                             </div>
                             <div class="date">
                                 Date: <%= message.added %>
+                            </div>
+                            <div>
+                                <a href="/message/<%= index %>">Go to message.</a>
                             </div>
                         </div>
 

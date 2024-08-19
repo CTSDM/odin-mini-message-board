@@ -13,6 +13,11 @@ const getPostMessage = function(req, res) {
         added: new Date(),
     });
     res.redirect("/");
-}
+};
 
-module.exports = { printMessages, printForm, getPostMessage };
+const printSingleMessage = function(req, res) {
+    res.locals.messageId = +req.params.id;
+    res.render("../views/pages/message.ejs");
+};
+
+module.exports = { printMessages, printSingleMessage, printForm, getPostMessage };

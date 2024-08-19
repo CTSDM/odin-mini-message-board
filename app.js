@@ -29,4 +29,3 @@ app.use((req, res, next) => {
 app.use(defaultRouter);
 
 app.listen(PORT, () => console.log(`Server is up on port ${PORT}`));
-
