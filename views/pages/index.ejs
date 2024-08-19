@@ -1,0 +1,25 @@
+<%- include('../partials/head.ejs') %>
+    <%- include('../partials/header.ejs') %>
+
+        <body>
+            <main>
+                <div class="messages-container">
+                    Messages:
+                    <% messages.forEach((message)=> { %>
+                        <div class="message">
+                            <div class="user">
+                                User: <%= message.user %>
+                            </div>
+                            <div class="message-text">
+                                Message: <%= message.text %>
+                            </div>
+                            <div class="date">
+                                Date: <%= message.added %>
+                            </div>
+                        </div>
+
+                        <% }); %>
+                </div>
+            </main>
+        </body>
+        <%- include('../partials/footer.ejs') %>

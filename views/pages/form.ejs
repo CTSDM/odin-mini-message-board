@@ -1,0 +1,21 @@
+<%- include('../partials/head.ejs') %>
+    <%- include('../partials/header.ejs') %>
+
+        <body>
+            <main>
+                <form method="POST" action="/new">
+                    <div class="message">
+                        <div class="user">
+                            <label for="name">Author:</label>
+                            <input type="text" name="user">
+                        </div>
+                        <div class="message-text">
+                            <label for="message">Message:</label>
+                            <textarea rows="2" cols="80" name="message"></textarea>
+                        </div>
+                        <button type="submit">Submit!</button>
+                    </div>
+                </form>
+            </main>
+        </body>
+        <%- include('../partials/footer.ejs') %>
