@@ -3,7 +3,7 @@ const defaultRouter = require('./routes/defaultRoute');
 const path = require("node:path");
 require('dotenv').config();
 
-console.log(process.env.DATABASE_URL);
+console.log(process.env);
 const app = express();
 const PORT = 5000;
 const assetsPath = path.join(__dirname, "public");
