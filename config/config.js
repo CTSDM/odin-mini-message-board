@@ -9,4 +9,9 @@ const env = {
     }
 }
 
-module.exports = env;
+const messageRequirements = {
+    usernameLength: 10,
+    messageLength: 255,
+}
+
+module.exports = { env, messageRequirements };

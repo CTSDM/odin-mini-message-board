@@ -1,5 +1,28 @@
 const db = require('../db/queries');
-const env = require('../config/config.js');
+const { env, messageRequirements } = require('../config/config.js');
+const { body, query, validationResult } = require('express-validator');
+
+const errMessages = {
+    alphaErr: 'must only container letters.',
+    user: {
+        lengthErr: `must be between 1 and ${messageRequirements.usernameLength} characters.`,
+    },
+    message: {
+        lenghtErr: `must be between 1 and ${messageRequirements.messageLength} characteres.`,
+    }
+}
+
+console.log(typeof messageRequirements.messageLength, messageRequirements.messageLength);
+console.log(typeof messageRequirements.usernameLength, messageRequirements.usernameLength);
+
+
+const validateMessage = [
+    body("user").trim()
+        .isAlpha().withMessage(`Username ${errMessages.alphaErr}`)
+        .isLength({ min: 1, max: messageRequirements.usernameLength }).withMessage(`Username length ${errMessages.user.lengthErr}`),
+    body("message").trim()
+        .isLength({ min: 1, max: messageRequirements.messageLength }).withMessage(`Message length ${errMessages.message.lenghtErr}`),
+]
 
 async function printMessages(req, res) {
     const messages = await db.getAllMessages();
@@ -14,18 +37,37 @@ const printForm = function(req, res) {
     res.render("../views/pages/form.ejs");
 };
 
-async function getPostMessage(req, res) {
-    // we update the database without sanitizing the input
-    const messageTimestamp = Date.now();
-    const messageObj = {};
-    const { user, message } = req.body;
-    messageObj.user = user;
-    messageObj.message = message;
-    messageObj.added = messageTimestamp;
+const addMessage = [validateMessage,
+    async function(req, res) {
+        const { user, message } = req.body;
+        if (user.trim().toLowerCase() === 'admin') {
+            // no one can't post as an admin
+            const errors = [{ msg: "Can't post as and admin." }];
+            res.render("../views/pages/form.ejs",
+                {
+                    errors: errors,
+                }
+            );
+            return;
+        }
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(400).render('../views/pages/form.ejs',
+                {
+                    errors: errors.array(),
+                });
+        }
+        // we update the database without sanitizing the input
+        const messageTimestamp = Date.now();
+        const messageObj = {};
+        messageObj.user = user;
+        messageObj.message = message;
+        messageObj.added = messageTimestamp;
 
-    db.addMessage(messageObj);
-    res.redirect("/");
-}
+        db.addMessage(messageObj);
+        res.redirect("/");
+    }
+];
 
 async function printSingleMessage(req, res) {
     // we need to update this one too
@@ -63,4 +105,4 @@ async function fillTables(req, res) {
     res.redirect('/');
 }
 
-module.exports = { printMessages, printSingleMessage, printForm, getPostMessage, deleteEverything, printFormDrop, fillTables };
+module.exports = { printMessages, printSingleMessage, printForm, addMessage, deleteEverything, printFormDrop, fillTables };

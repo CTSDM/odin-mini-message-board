@@ -5,7 +5,7 @@ const messages = [
         added: 157812733000,
     },
     {
-        text: "All ready",
+        text: "Almost ready",
         user: "ADMIN",
         added: 662637133000,
     },

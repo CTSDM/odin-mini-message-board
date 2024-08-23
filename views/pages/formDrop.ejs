@@ -4,11 +4,12 @@
         <body>
             <main>
                 <div>
-                    <% if (locals.errorAdmin) %>
+                    <% if (locals.errorAdmin) { %>
                         <div>
                             <%= locals.errorAdmin %>
                         </div>
-                        Introduce your admin credentials to drop the database tables.
+                        <% } %>
+                            Introduce your admin credentials to drop the database tables.
                 </div>
                 <form method="POST">
                     <div class="message">

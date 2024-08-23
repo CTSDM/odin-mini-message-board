@@ -1,5 +1,5 @@
 const pool = require('./pool');
-const env = require('../config/config.js');
+const { env } = require('../config/config.js');
 const fillTable = require('./populatedb.js');
 
 async function dropTable() {

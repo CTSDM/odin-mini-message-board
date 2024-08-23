@@ -3,19 +3,20 @@
 
         <body>
             <main>
-                <form method="POST" action="/new">
-                    <div class="message">
-                        <div class="user">
-                            <label for="user">Author:</label>
-                            <input type="text" name="user">
+                <%- include('../partials/errors.ejs') %>
+                    <form method="POST" action="/new">
+                        <div class="message">
+                            <div class="user">
+                                <label for="user">Author:</label>
+                                <input type="text" name="user" maxlength="12">
+                            </div>
+                            <div class="message-text">
+                                <label for="message">Message:</label>
+                                <textarea rows="2" cols="80" name="message" maxlength="254"></textarea>
+                            </div>
+                            <button type="submit">Submit!</button>
                         </div>
-                        <div class="message-text">
-                            <label for="message">Message:</label>
-                            <textarea rows="2" cols="80" name="message"></textarea>
-                        </div>
-                        <button type="submit">Submit!</button>
-                    </div>
-                </form>
+                    </form>
             </main>
         </body>
         <%- include('../partials/footer.ejs') %>

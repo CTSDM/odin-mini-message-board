@@ -1,5 +1,5 @@
 const { Client } = require('pg');
-const env = require('../config/config.js');
+const { env } = require('../config/config.js');
 const messages = require('./stockData.js');
 
 const values_sequences = [];
