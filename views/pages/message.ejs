@@ -5,17 +5,21 @@
             <main>
                 <div class="messages-container">
                     Messages:
-                    <div class="message">
-                        <div class="user">
-                            User: <%= messages[messageId].user %>
+                    <% if (message) {%>
+                        <div class="message">
+                            <div class="user">
+                                User: <%= message.username %>
+                            </div>
+                            <div class="message-text">
+                                Message: <%= message.message_body%>
+                            </div>
+                            <div class="date">
+                                Date: <%= message.added %>
+                            </div>
                         </div>
-                        <div class="message-text">
-                            Message: <%= messages[messageId].text %>
-                        </div>
-                        <div class="date">
-                            Date: <%= messages[messageId].added %>
-                        </div>
-                    </div>
+                        <%} else { %>
+                            <span> Message not found!</span>
+                            <% } %>
                 </div>
             </main>
         </body>

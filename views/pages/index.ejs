@@ -5,23 +5,26 @@
             <main>
                 <div class="messages-container">
                     Messages:
-                    <% messages.forEach((message, index)=> { %>
-                        <div class="message">
-                            <div class="user">
-                                User: <%= message.user %>
+                    <% if(locals.messages) { %>
+                        <% messages.forEach((message, index)=> { %>
+                            <div class="message">
+                                <div class="user">
+                                    User: <%= message.username %>
+                                </div>
+                                <div class="message-text">
+                                    Message: <%= message.message_body %>
+                                </div>
+                                <div class="date">
+                                    Date: <%= message.added %>
+                                </div>
+                                <div>
+                                    <a href="/message/<%= index + 1 %>">Go to message.</a>
+                                </div>
                             </div>
-                            <div class="message-text">
-                                Message: <%= message.text %>
-                            </div>
-                            <div class="date">
-                                Date: <%= message.added %>
-                            </div>
-                            <div>
-                                <a href="/message/<%= index %>">Go to message.</a>
-                            </div>
-                        </div>
 
-                        <% }); %>
+                            <% }); %>
+                                <% }else %>
+                                    There are no messages available.
                 </div>
             </main>
         </body>
