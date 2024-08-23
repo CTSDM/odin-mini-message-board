@@ -1,7 +1,7 @@
 body {
     background: lightgrey;
     font-family: monospace;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
 }
 
 .messages-container {
@@ -29,4 +29,14 @@ footer>div {
 
 footer>div>span {
     display: block;
+}
+
+.error {
+    font-weight: 900;
+    color: red;
+}
+
+header {
+    text-align: center;
+    font-size: 2rem;
 }

@@ -78,12 +78,11 @@ async function printSingleMessage(req, res) {
 }
 
 const printFormDrop = function(req, res) {
-    res.render("../views/pages/formDrop.ejs");
+    res.render("../views/pages/formAdmin.ejs");
 };
 
 async function deleteEverything(req, res) {
-    const { admin, password } = req.body;
-    if (password === env.admin.password && admin === env.admin.username) {
+    if (checkAdmin(req.body)) {
         await db.dropTable();
         console.log('sucess, the database was wiped');
         res.redirect("/");
@@ -91,14 +90,28 @@ async function deleteEverything(req, res) {
     }
     console.log("Authorization denied.");
     res.locals.errorAdmin = "The login credentials are not correct.";
-    res.render("../views/pages/formDrop.ejs");
+    res.render("../views/pages/formAdmin.ejs");
 };
 
 async function fillTables(req, res) {
     // we drop the table if exists, create a new one if it doesn't exist and fill it with stock data
-    await db.dropTable();
-    await db.fillTable();
-    res.redirect('/');
+    if (checkAdmin(req.body)) {
+        await db.dropTable();
+        await db.fillTable();
+        console.log('sucess, the database was filled with stock data');
+        res.redirect('/');
+    } else {
+        console.log("Authorization denied.");
+        res.locals.errorAdmin = "The login credentials are not correct.";
+        res.render("../views/pages/formAdmin.ejs");
+    }
+}
+
+function checkAdmin(body) {
+    const { admin, password } = body;
+    if (password === env.admin.password && admin === env.admin.username)
+        return true;
+    return false;
 }
 
 module.exports = { printMessages, printSingleMessage, printForm, addMessage, deleteEverything, printFormDrop, fillTables };

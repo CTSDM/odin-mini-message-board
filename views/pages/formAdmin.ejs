@@ -5,21 +5,21 @@
             <main>
                 <div>
                     <% if (locals.errorAdmin) { %>
-                        <div>
+                        <div class="error">
                             <%= locals.errorAdmin %>
                         </div>
                         <% } %>
-                            Introduce your admin credentials to drop the database tables.
+                            Introduce your admin credentials to act on the database.
                 </div>
                 <form method="POST">
                     <div class="message">
                         <div class="user">
                             <label for="admin">Admin user:</label>
-                            <input type="text" name="admin">
+                            <input type="text" name="admin" required>
                         </div>
                         <div class="password">
                             <label for="password">Password:</label>
-                            <input type="password" name="password">
+                            <input type="password" name="password" required>
                         </div>
                         <button type="submit" formaction="/delete">DELETE!</button>
                         <button type="submit" formaction="/fill-tables">FILL DATABASE WITH STOCK DATA!</button>
