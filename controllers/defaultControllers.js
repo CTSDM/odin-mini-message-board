@@ -12,10 +12,6 @@ const errMessages = {
     }
 }
 
-console.log(typeof messageRequirements.messageLength, messageRequirements.messageLength);
-console.log(typeof messageRequirements.usernameLength, messageRequirements.usernameLength);
-
-
 const validateMessage = [
     body("user").trim()
         .isAlpha().withMessage(`Username ${errMessages.alphaErr}`)

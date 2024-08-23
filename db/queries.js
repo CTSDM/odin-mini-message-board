@@ -20,7 +20,7 @@ async function getAllMessages() {
 }
 
 async function addMessage(message) {
-    await pool.query(`INSERT INTO ${env.database.tableName} (username, message_body, added) VALUES ($1, $2, to_timestamp($3))`, [message.user, message.message, message.added]);
+    await pool.query(`INSERT INTO ${env.database.tableName} (username, message_body, added) VALUES ($1, $2, to_timestamp($3))`, [message.user, message.message, message.added / 1000]);
 }
 
 async function getSingleMessage(messageId) {
