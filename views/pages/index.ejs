@@ -1,32 +1,22 @@
-<%- include('../partials/head.ejs') %>
-    <%- include('../partials/header.ejs') %>
-
-        <body>
-            <main>
-                <div class="messages-container">
-                    Messages:
-                    <% if(locals.messages) { %>
-                        <% messages.forEach((message, index)=> { %>
-                            <div class="message">
-                                <div class="user">
-                                    User: <%= message.username %>
-                                </div>
-                                <div class="message-text">
-                                    Message: <%= message.message_body %>
-                                </div>
-                                <div class="date">
-                                    Date: <%= message.added %>
-                                </div>
-                                <div>
-                                    <a href="/message/<%= index + 1 %>">Go to message.</a>
-                                </div>
-                            </div>
-
-                            <% }); %>
-                                <% }else {%>
-                                    There are no messages available.
-                                    <% } %>
+<%- include('../partials/head.ejs') %> <%- include('../partials/header.ejs') %>
+<body>
+    <main>
+        <div class="messages-container">
+            Messages: <% if(locals.messages) { %> <% messages.forEach((message,
+            index)=> { %>
+            <div class="message">
+                <div class="user">User: <%= message.username %></div>
+                <div class="message-text">
+                    Message: <%= message.message_body %>
                 </div>
-            </main>
-        </body>
-        <%- include('../partials/footer.ejs') %>
+                <div class="date">Date: <%= message.added %></div>
+                <div>
+                    <a href="/message/<%= index + 1 %>">Go to message.</a>
+                </div>
+            </div>
+
+            <% }); %> <% }else {%> There are no messages available. <% } %>
+        </div>
+    </main>
+</body>
+<%- include('../partials/footer.ejs') %>

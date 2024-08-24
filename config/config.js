@@ -6,12 +6,12 @@ const env = {
     admin: {
         username: process.env.ADMIN_REMOVE,
         password: process.env.PASSWORD_REMOVE,
-    }
-}
+    },
+};
 
 const messageRequirements = {
     usernameLength: 10,
     messageLength: 255,
-}
+};
 
 module.exports = { env, messageRequirements };
